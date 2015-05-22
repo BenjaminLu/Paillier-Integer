@@ -158,6 +158,18 @@ public class CipherTest
     }
 
     @Test
+    public void testSerializableWithCipherBytes()
+    {
+        BigInteger a = new BigInteger(NUMBER_BIT_LENGTH, rng);
+        Cipher cipher = new Cipher(a, publicKey);
+        byte[] cipherBytes = cipher.getCipherBytes();
+        //encode cipherBytes to  base64 or hexadecimal string and send it to receiver or store into disk
+        BigInteger cipherValue = new BigInteger(cipherBytes);
+        Cipher cipher2 = new Cipher(publicKey, cipherValue);
+        assertEquals(cipher.decrypt(privateKey), cipher2.decrypt(privateKey));
+    }
+
+    @Test
     public void testSerializableWithInterface() throws IOException, ClassNotFoundException
     {
         BigInteger a = new BigInteger(NUMBER_BIT_LENGTH, rng);

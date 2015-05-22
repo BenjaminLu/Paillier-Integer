@@ -92,6 +92,10 @@ public class Cipher implements Serializable
         return cipher;
     }
 
+    public byte[] getCipherBytes()
+    {
+        return cipher.toByteArray();
+    }
     public PublicKey getPublicKey()
     {
         return publicKey;
