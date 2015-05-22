@@ -22,7 +22,7 @@ Cipher cipher = new Cipher(message, publicKey);
 System.out.println(cipher.getCipher());
 ```
 
-###Dencrypt a number from ciphertext
+###Decrypt a number from ciphertext
 
 ```java
 BigInteger message = new BigInteger("5");
