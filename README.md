@@ -141,6 +141,17 @@ BigInteger cipherValue = cipher.getCipher();
 Cipher cipher = new Cipher(publicKey, cipherValue);
 ```
 
+####By bytes of cipher number
+
+```java
+BigInteger a = new BigInteger(NUMBER_BIT_LENGTH, rng);
+Cipher cipher = new Cipher(a, publicKey);
+byte[] cipherBytes = cipher.getCipherBytes();
+//encode cipherBytes to base64 or hexadecimal string and send it to receiver or store into disk
+BigInteger cipherValue = new BigInteger(cipherBytes);
+Cipher cipher = new Cipher(publicKey, cipherValue);
+```
+
 ####By Serializable interface
 
 ```java
