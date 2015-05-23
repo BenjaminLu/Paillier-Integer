@@ -19,8 +19,8 @@ public class PrivateKey implements Serializable
         Random rng = new SecureRandom();
         BigInteger p;
         BigInteger q;
-        p = new BigInteger(bitLength/2, 20, rng);
-        q = new BigInteger(bitLength/2, 20, rng);
+        p = new BigInteger(bitLength / 2, 20, rng);
+        q = new BigInteger(bitLength / 2, 20, rng);
 
         BigInteger n = p.multiply(q);
         p = p.subtract(BigInteger.ONE);

@@ -1,4 +1,5 @@
 package benjaminlu.paillier.test;
+
 import benjaminlu.paillier.Cipher;
 import benjaminlu.paillier.PrivateKey;
 import benjaminlu.paillier.PublicKey;
@@ -10,6 +11,7 @@ import java.util.Random;
 
 import benjaminlu.paillier.exceptions.PublicKeysNotEqualException;
 import org.junit.*;
+
 import static org.junit.Assert.*;
 
 public class CipherTest

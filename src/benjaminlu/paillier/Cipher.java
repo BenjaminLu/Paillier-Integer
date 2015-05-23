@@ -18,7 +18,7 @@ public class Cipher implements Serializable
 
     public Cipher(PublicKey publicKey)
     {
-       this(BigInteger.ZERO, publicKey);
+        this(BigInteger.ZERO, publicKey);
     }
 
     public Cipher(PublicKey publicKey, BigInteger cipher)
@@ -59,8 +59,7 @@ public class Cipher implements Serializable
 
     public Cipher add(Cipher other) throws PublicKeysNotEqualException
     {
-        if(!publicKey.equals(other.getPublicKey()))
-        {
+        if (!publicKey.equals(other.getPublicKey())) {
             throw new PublicKeysNotEqualException("Cannot perform add operation with different public keys");
         }
 
@@ -83,7 +82,7 @@ public class Cipher implements Serializable
 
     public void randomize()
     {
-        BigInteger randomZeroCipher =  encrypt(BigInteger.ZERO);
+        BigInteger randomZeroCipher = encrypt(BigInteger.ZERO);
         cipher = cipher.multiply(randomZeroCipher).mod(publicKey.getNSquared());
     }
 
@@ -96,6 +95,7 @@ public class Cipher implements Serializable
     {
         return cipher.toByteArray();
     }
+
     public PublicKey getPublicKey()
     {
         return publicKey;
