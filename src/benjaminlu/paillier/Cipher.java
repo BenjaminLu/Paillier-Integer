@@ -82,7 +82,14 @@ public class Cipher implements Serializable
 
     public void randomize()
     {
-        BigInteger randomZeroCipher = encrypt(BigInteger.ZERO);
+        BigInteger r;
+        BigInteger n = publicKey.getN();
+        BigInteger nSquared = publicKey.getNSquared();
+        do {
+            r = new BigInteger(publicKey.getBitLength(), rng);
+        } while (r.compareTo(n) >= 0);
+
+        BigInteger randomZeroCipher = r.modPow(n, nSquared);
         cipher = cipher.multiply(randomZeroCipher).mod(publicKey.getNSquared());
     }
 
