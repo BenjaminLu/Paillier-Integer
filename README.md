@@ -113,6 +113,17 @@ cipher = cipher.multiply(b);
 System.out.println(cipher.decrypt(privateKey));
 ```
 
+
+###Reproduce the same ciphertext by trapdoor
+If you want to reproduce the same ciphertext, use the trapdoor method that according to the section 5 of the [original paper](http://www.cs.tau.ac.il/~fiat/crypt07/papers/Pai99pai.pdf). If you give someone else the plaintext, r, public key and ciphertext, they can reproduce the same ciphertext by plaintext, r and public key so they will know the ciphertext is binded to the plaintext without leaking you private key.
+
+```java
+Cipher c1 = new Cipher(new BigInteger("51545454545"), publicKey);
+BigInteger r = c1.getTrapdoorR(privateKey);
+Cipher c2 = Cipher.encryptWithR(new BigInteger("51545454545"), publicKey, r);
+assertEquals(c1.getCipher(), c2.getCipher());
+```
+
 ###Randomize
 
 Randomization is useful so a server does not know that you are resubmitting a value they have already processed. Randomizing the encrypted integer without needing the private key is based on the homomorphic properties to add a randomly encrypted zero.
