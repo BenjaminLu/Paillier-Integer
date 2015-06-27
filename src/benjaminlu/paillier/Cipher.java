@@ -93,6 +93,23 @@ public class Cipher implements Serializable
         cipher = cipher.multiply(randomZeroCipher).mod(publicKey.getNSquared());
     }
 
+    public static Cipher encryptWithR(BigInteger plaintext, PublicKey publicKey, BigInteger r)
+    {
+        BigInteger n = publicKey.getN();
+        BigInteger nSquared = publicKey.getNSquared();
+        BigInteger g = publicKey.getG();
+        BigInteger cipher = g.modPow(plaintext, nSquared).multiply(r.modPow(n, nSquared)).mod(nSquared);
+        return new Cipher(publicKey, cipher);
+    }
+
+    public BigInteger getTrapdoorR(PrivateKey privateKey)
+    {
+        BigInteger m = decrypt(privateKey);
+        BigInteger intermediateC = cipher.modPow(BigInteger.ONE, publicKey.getN()).multiply(publicKey.getG().modPow(m.negate(), publicKey.getN())).mod(publicKey.getN());
+        BigInteger r = intermediateC.modPow(publicKey.getN().modPow(BigInteger.ONE.negate(), privateKey.getLambda()), publicKey.getN());
+        return r;
+    }
+
     public BigInteger getCipher()
     {
         return cipher;

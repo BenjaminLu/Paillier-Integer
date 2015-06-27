@@ -207,4 +207,22 @@ public class CipherTest
         ans = ans.subtract(publicKey.getN());
         assertEquals(expected, ans);
     }
+
+    @Test
+    public void testCipherEqualsWithTrapdoorRFromPrivateKey()
+    {
+        Cipher c1 = new Cipher(new BigInteger("51545454545"), publicKey);
+        BigInteger r = c1.getTrapdoorR(privateKey);
+        Cipher c2 = Cipher.encryptWithR(new BigInteger("51545454545"), publicKey, r);
+        assertEquals(c1.getCipher(), c2.getCipher());
+    }
+
+    @Test
+    public void testCipherNotEqualsWithTrapdoorRButDifferentPlaintext()
+    {
+        Cipher c1 = new Cipher(new BigInteger("51545454545"), publicKey);
+        BigInteger r = c1.getTrapdoorR(privateKey);
+        Cipher c2 = Cipher.encryptWithR(new BigInteger("1234548787979"), publicKey, r);
+        assertNotEquals(c1.getCipher(), c2.getCipher());
+    }
 }
