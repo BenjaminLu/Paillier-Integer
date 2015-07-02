@@ -115,7 +115,7 @@ System.out.println(cipher.decrypt(privateKey));
 
 
 ###Reproduce the same ciphertext by trapdoor
-If you want to reproduce the same ciphertext, use the trapdoor method that according to the section 5 of the [original paper](http://www.cs.tau.ac.il/~fiat/crypt07/papers/Pai99pai.pdf). If you give someone else the plaintext, r, public key and ciphertext, they can reproduce the same ciphertext by plaintext, r and public key so they will know the ciphertext is binded to the plaintext without leaking you private key.
+If you want to reproduce the same ciphertext, use the trapdoor method that according to the section 5 of the [original paper](http://www.cs.tau.ac.il/~fiat/crypt07/papers/Pai99pai.pdf). If you give someone else the plaintext, r, public key and ciphertext, they can reproduce the same ciphertext by plaintext, r and public key so they will know the ciphertext is binded to the plaintext without leaking your private key.
 
 ```java
 Cipher c1 = new Cipher(new BigInteger("51545454545"), publicKey);
