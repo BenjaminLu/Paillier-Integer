@@ -2,7 +2,7 @@
 Paillier Integer is a well-tested, pure java implementation of [Paillier cryptosystem](http://en.wikipedia.org/wiki/Paillier_cryptosystem).
 
 ##Install
-You can find the jar file that built with the jdk 1.8 (version 1.8.0_25) under the bin folder.
+You can find the jar file that built with the jdk 1.7 (version 1.7.0_79) under the bin folder.
 
 ##Usage
 
