@@ -1,19 +1,19 @@
-#Paillier Integer
+# Paillier Integer
 Paillier Integer is a well-tested, pure java implementation of [Paillier cryptosystem](http://en.wikipedia.org/wiki/Paillier_cryptosystem).
 
-##Install
+## Install
 You can find the jar file that built with the jdk 1.7 (version 1.7.0_79) under the bin folder.
 
-##Usage
+## Usage
 
-###Generate key pair of Paillier cryptosystem
+### Generate key pair of Paillier cryptosystem
 
 ```java
 PrivateKey privateKey = new PrivateKey(2048);
 PublicKey publicKey = privateKey.getPublicKey();
 ```
 
-###Encrypt a number
+### Encrypt a number
 
 ```java
 BigInteger message = new BigInteger("5");
@@ -22,7 +22,7 @@ Cipher cipher = new Cipher(message, publicKey);
 System.out.println(cipher.getCipher());
 ```
 
-###Decrypt a number from ciphertext
+### Decrypt a number from ciphertext
 
 ```java
 BigInteger message = new BigInteger("5");
@@ -31,7 +31,7 @@ Cipher cipher = new Cipher(message, publicKey);
 System.out.println(cipher.decrypt(privateKey));
 ```
 
-###Addition of positive constant
+### Addition of positive constant
 
 ```java
 BigInteger a = new BigInteger("5");
@@ -42,7 +42,7 @@ cipher = cipher.add(b);
 System.out.println(cipher.decrypt(privateKey));
 ```
 
-###Addition of encrypted integers
+### Addition of encrypted integers
 
 ```java
 BigInteger a = new BigInteger("5");
@@ -58,7 +58,7 @@ try {
 System.out.println(cipherA.decrypt(privateKey));
 ```
 
-###Subtract to negative
+### Subtract to negative
 ```java
 BigInteger a = new BigInteger("2000");
 BigInteger b = new BigInteger("3000");
@@ -102,7 +102,7 @@ try {
 }
 ```
 
-###Multiplication of constant
+### Multiplication of constant
 
 ```java
 BigInteger a = new BigInteger("5");
@@ -114,7 +114,7 @@ System.out.println(cipher.decrypt(privateKey));
 ```
 
 
-###Reproduce the same ciphertext by trapdoor
+### Reproduce the same ciphertext by trapdoor
 If you want to reproduce the same ciphertext, use the trapdoor method that according to the section 5 of the [original paper](http://www.cs.tau.ac.il/~fiat/crypt07/papers/Pai99pai.pdf). If you give someone else the plaintext, r, public key and ciphertext, they can reproduce the same ciphertext by plaintext, r and public key so they will know the ciphertext is binded to the plaintext without leaking your private key.
 
 ```java
@@ -124,7 +124,7 @@ Cipher c2 = Cipher.encryptWithR(new BigInteger("51545454545"), publicKey, r);
 assertEquals(c1.getCipher(), c2.getCipher());
 ```
 
-###Randomize
+### Randomize
 
 Randomization is useful so a server does not know that you are resubmitting a value they have already processed. Randomizing the encrypted integer without needing the private key is based on the homomorphic properties to add a randomly encrypted zero.
 
@@ -140,9 +140,9 @@ System.out.println(cipherValue1 + " is not equal to " + cipherValue2);
 System.out.println(plainValue1 + " is equal to " + plainValue2);
 ```
 
-###Serialization of cipher
+### Serialization of cipher
 
-####By cipher
+#### By cipher
 
 ```java
 BigInteger a = new BigInteger(NUMBER_BIT_LENGTH, rng);
@@ -152,7 +152,7 @@ BigInteger cipherValue = cipher.getCipher();
 Cipher cipher = new Cipher(publicKey, cipherValue);
 ```
 
-####By bytes of cipher number
+#### By bytes of cipher number
 
 ```java
 BigInteger a = new BigInteger(NUMBER_BIT_LENGTH, rng);
@@ -163,7 +163,7 @@ BigInteger cipherValue = new BigInteger(cipherBytes);
 Cipher cipher = new Cipher(publicKey, cipherValue);
 ```
 
-####By Serializable interface
+#### By Serializable interface
 
 ```java
 BigInteger a = new BigInteger(512, rng);
@@ -180,7 +180,7 @@ ObjectInputStream ois = new ObjectInputStream(bais);
 Cipher cipherReadFromDiskOrInternet = (Cipher) ois.readObject();
 assertEquals(a, cipherReadFromDiskOrInternet.decrypt(privateKey));
 ```
-###Serialization of key pair
+### Serialization of key pair
 
 Private key
 
@@ -213,5 +213,5 @@ Cipher cipher = new Cipher(message, publicKeyReadFromDiskOrInternet);
 BigInteger result = cipher.decrypt(privateKey);
 ```
 
-##License
+## License
 Code and documentation copyright 2015 Benjamin Lu. Code released under the MIT license.
